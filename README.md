@@ -34,7 +34,6 @@
 
 ### Packages/Library
 
-- react
 - AntD
 - Axios
 - react-icons(for icons)
