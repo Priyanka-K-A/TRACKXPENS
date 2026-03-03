@@ -1,0 +1,379 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600&display=swap');
+
+$font-display: 'Sora', sans-serif;
+$font-body: 'DM Sans', sans-serif;
+
+$bg-card: #1a1e28;
+$bg-panel: #13161d;
+$bg-item: #1f2535;
+$bg-hover: #252c3f;
+
+$color-primary: #6c63ff;
+$color-primary-light: #857dff;
+$color-income: #00d4a4;
+$color-expense: #ff5c7c;
+
+$text-primary: #f0f2f8;
+$text-secondary: #8b92a8;
+$text-muted: #555e77;
+
+$border: #1e2435;
+$border-light: #252c3f;
+$radius-sm: 8px;
+$radius-md: 12px;
+$radius-lg: 16px;
+$transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+
+.chart-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 20px;
+  font-family: $font-body;
+  color: $text-primary;
+
+  &.empty-state {
+    min-height: 400px;
+    justify-content: flex-start;
+  }
+}
+
+// ─── Top Header ───────────────────────────────────────────────────────────────
+.chart-top-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+
+  .chart-heading {
+    font-family: $font-display;
+    font-size: 16px;
+    font-weight: 700;
+    color: $text-primary;
+    margin: 0 0 2px;
+  }
+
+  .chart-subheading {
+    font-size: 11px;
+    color: $text-muted;
+    margin: 0;
+  }
+}
+
+.chart-toggle {
+  display: flex;
+  background: $bg-panel;
+  border: 1px solid $border;
+  border-radius: $radius-sm;
+  overflow: hidden;
+  padding: 3px;
+  gap: 2px;
+
+  .toggle-btn {
+    width: 30px;
+    height: 28px;
+    background: transparent;
+    border: none;
+    color: $text-muted;
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: $transition;
+
+    &:hover {
+      color: $text-secondary;
+      background: $bg-item;
+    }
+
+    &.active {
+      background: $color-primary;
+      color: white;
+      box-shadow: 0 2px 8px rgba($color-primary, 0.4);
+    }
+  }
+}
+
+// ─── Mini Stats ───────────────────────────────────────────────────────────────
+.chart-mini-stats {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  background: $bg-panel;
+  border: 1px solid $border;
+  border-radius: $radius-md;
+  margin-bottom: 16px;
+
+  .mini-stat {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+
+    .anticon { font-size: 14px; flex-shrink: 0; }
+
+    div {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .ms-label {
+      font-size: 10px;
+      color: $text-muted;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .ms-value {
+      font-family: $font-display;
+      font-size: 13px;
+      font-weight: 700;
+      &.income { color: $color-income; }
+      &.expense { color: $color-expense; }
+    }
+  }
+
+  .mini-stat-divider {
+    width: 1px;
+    height: 32px;
+    background: $border;
+  }
+
+  .mini-ratio {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 80px;
+
+    .ratio-bar {
+      height: 5px;
+      background: rgba($color-expense, 0.3);
+      border-radius: 3px;
+      overflow: hidden;
+
+      .ratio-income {
+        height: 100%;
+        background: $color-income;
+        border-radius: 3px;
+        transition: width 0.6s ease;
+      }
+    }
+
+    .ratio-label {
+      font-size: 10px;
+      color: $text-muted;
+      font-weight: 500;
+    }
+  }
+}
+
+// ─── Chart Wrapper ────────────────────────────────────────────────────────────
+.chart-wrapper {
+  flex: 1;
+  min-height: 220px;
+
+  .recharts-legend-item-text { color: $text-secondary !important; }
+  .recharts-text { fill: $text-muted !important; }
+}
+
+.chart-tooltip {
+  background: #1a1e28;
+  border: 1px solid #252c3f;
+  border-radius: 10px;
+  padding: 10px 14px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+
+  .tooltip-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: $text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0 0 4px;
+  }
+
+  .tooltip-value {
+    font-family: $font-display;
+    font-size: 16px;
+    font-weight: 700;
+    color: $text-primary;
+    margin: 0;
+  }
+}
+
+.chart-divider {
+  height: 1px;
+  background: $border;
+  margin: 16px 0;
+}
+
+// ─── Empty State ──────────────────────────────────────────────────────────────
+.chart-empty-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  padding: 40px 20px;
+  text-align: center;
+
+  .empty-icon {
+    font-size: 48px;
+    margin-bottom: 14px;
+    opacity: 0.5;
+  }
+
+  .empty-title {
+    font-family: $font-display;
+    font-size: 16px;
+    font-weight: 700;
+    color: $text-secondary;
+    margin: 0 0 6px;
+  }
+
+  .empty-desc {
+    font-size: 13px;
+    color: $text-muted;
+    max-width: 240px;
+    line-height: 1.5;
+    margin: 0;
+  }
+}
+
+// ─── Top Section ──────────────────────────────────────────────────────────────
+.top-section {
+  margin-bottom: 16px;
+
+  .top-section-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 12px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: $text-muted;
+
+    .anticon { font-size: 14px; }
+  }
+}
+
+.top-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.top-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: $bg-panel;
+  border: 1px solid $border;
+  border-radius: $radius-md;
+  transition: $transition;
+
+  &:hover {
+    background: $bg-item;
+    border-color: $border-light;
+  }
+
+  .top-rank { font-size: 16px; flex-shrink: 0; }
+  .top-emoji { font-size: 18px; flex-shrink: 0; }
+
+  .top-body {
+    flex: 1;
+    min-width: 0;
+
+    .top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 5px;
+
+      .top-name {
+        font-size: 12px;
+        font-weight: 600;
+        color: $text-secondary;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .top-val {
+        font-family: $font-display;
+        font-size: 13px;
+        font-weight: 700;
+        flex-shrink: 0;
+        margin-left: 8px;
+      }
+    }
+
+    .top-bar-track {
+      height: 3px;
+      background: $border;
+      border-radius: 2px;
+      overflow: hidden;
+      margin-bottom: 4px;
+
+      .top-bar-fill {
+        height: 100%;
+        border-radius: 2px;
+        transition: width 0.6s ease;
+      }
+    }
+
+    .top-pct {
+      font-size: 10px;
+      color: $text-muted;
+      font-weight: 500;
+    }
+  }
+}
+
+// ─── Footer ───────────────────────────────────────────────────────────────────
+.chart-footer {
+  display: flex;
+  gap: 0;
+  background: $bg-panel;
+  border: 1px solid $border;
+  border-radius: $radius-md;
+  overflow: hidden;
+
+  .footer-stat {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 16px;
+    gap: 3px;
+
+    &:first-child {
+      border-right: 1px solid $border;
+    }
+
+    .fs-label {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: $text-muted;
+    }
+
+    .fs-value {
+      font-family: $font-display;
+      font-size: 15px;
+      font-weight: 700;
+      color: $text-primary;
+    }
+  }
+}
