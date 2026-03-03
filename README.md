@@ -1,9 +1,16 @@
-# TrackXpens (A Expense Tracker)
+# TRACKXPENS (A Expense Tracker)
 
 ## Domain: _Web Development_ _(MERN STACK)_
 :small_blue_diamond: A user-friendly web application designed to streamline personal finance management. <br />
 :small_blue_diamond:Users can effortlessly log and categorize expenses, gaining valuable insights into their spending patterns. <br />
 :small_blue_diamond:With a clean interface, it allows for efficient tracking, displaying comprehensive summaries and categorizations. <br />
+
+### Features:
+- User Authentication (Signup / Login with JWT)
+- Add, Edit & Delete Expenses
+- Analytics Dashboard
+- Filter by Date Range
+- Category-wise Tracking
 
 
 ### Steps:
@@ -29,10 +36,13 @@
 
 - react
 - AntD
+- Axios
 - react-icons(for icons)
 - SASS(for Styling)
 - node
 - express
+- JWT Authentication
+- bcryptjs
 
 ### Platform
 
